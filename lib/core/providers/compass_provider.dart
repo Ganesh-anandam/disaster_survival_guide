@@ -15,7 +15,7 @@ class CompassProvider extends ChangeNotifier {
   List<SafeZone> _safeZones = [];
   SafeZone? _selectedZone;
   Position? _currentPosition;
-  double? _bearing;        // degrees from North (0-360)
+  double? _bearing; // degrees from North (0-360)
   double? _distanceMeters;
   bool _isLoading = false;
   String _errorMessage = '';
@@ -57,7 +57,8 @@ class CompassProvider extends ChangeNotifier {
   Future<void> startTracking() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      _errorMessage = 'Location services are disabled. Enable GPS to use safe route.';
+      _errorMessage =
+          'Location services are disabled. Enable GPS to use safe route.';
       notifyListeners();
       return;
     }

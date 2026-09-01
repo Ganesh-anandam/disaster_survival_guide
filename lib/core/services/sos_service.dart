@@ -23,17 +23,17 @@ class SosService {
   // true = torch ON, false = torch OFF
   static const List<({bool on, int ms})> _morsePattern = [
     // S: three dots
-    (on: true, ms: 200),  (on: false, ms: 200),
-    (on: true, ms: 200),  (on: false, ms: 200),
-    (on: true, ms: 200),  (on: false, ms: 400),
+    (on: true, ms: 200), (on: false, ms: 200),
+    (on: true, ms: 200), (on: false, ms: 200),
+    (on: true, ms: 200), (on: false, ms: 400),
     // O: three dashes
-    (on: true, ms: 600),  (on: false, ms: 200),
-    (on: true, ms: 600),  (on: false, ms: 200),
-    (on: true, ms: 600),  (on: false, ms: 400),
+    (on: true, ms: 600), (on: false, ms: 200),
+    (on: true, ms: 600), (on: false, ms: 200),
+    (on: true, ms: 600), (on: false, ms: 400),
     // S: three dots
-    (on: true, ms: 200),  (on: false, ms: 200),
-    (on: true, ms: 200),  (on: false, ms: 200),
-    (on: true, ms: 200),  (on: false, ms: 1000),
+    (on: true, ms: 200), (on: false, ms: 200),
+    (on: true, ms: 200), (on: false, ms: 200),
+    (on: true, ms: 200), (on: false, ms: 1000),
   ];
 
   bool _isMorseActive = false;
@@ -127,8 +127,9 @@ class SosService {
     for (final beat in _morsePattern) {
       if (!_isMorseActive) break;
       try {
-        if (!kIsWeb && (defaultTargetPlatform == TargetPlatform.android ||
-            defaultTargetPlatform == TargetPlatform.iOS)) {
+        if (!kIsWeb &&
+            (defaultTargetPlatform == TargetPlatform.android ||
+                defaultTargetPlatform == TargetPlatform.iOS)) {
           if (beat.on) {
             await TorchLight.enableTorch();
           } else {
@@ -147,8 +148,9 @@ class SosService {
   void stopMorseSos() {
     _isMorseActive = false;
     try {
-      if (!kIsWeb && (defaultTargetPlatform == TargetPlatform.android ||
-          defaultTargetPlatform == TargetPlatform.iOS)) {
+      if (!kIsWeb &&
+          (defaultTargetPlatform == TargetPlatform.android ||
+              defaultTargetPlatform == TargetPlatform.iOS)) {
         TorchLight.disableTorch();
       }
     } catch (_) {}
