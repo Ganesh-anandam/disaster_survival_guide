@@ -55,7 +55,13 @@ class CompassProvider extends ChangeNotifier {
   }
 
   Future<void> startTracking() async {
-    // Check and request location permission
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      _errorMessage = 'Location services are disabled. Enable GPS to use safe route.';
+      notifyListeners();
+      return;
+    }
+
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
@@ -66,7 +72,6 @@ class CompassProvider extends ChangeNotifier {
       return;
     }
 
-    // Cancel existing subscription
     await _positionSubscription?.cancel();
 
     _positionSubscription = Geolocator.getPositionStream(

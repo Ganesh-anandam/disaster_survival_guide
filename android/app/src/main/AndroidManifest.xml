@@ -9,9 +9,6 @@
     <!-- Keep screen on during emergency -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!-- Send SMS for SOS beacon -->
-    <uses-permission android:name="android.permission.SEND_SMS" />
-
     <!-- Flashlight / Torch for Morse SOS -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
@@ -19,12 +16,8 @@
     <!-- Vibrate for haptic feedback -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!-- Foreground service for GPS in background -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
-
     <application
-        android:label="Disaster Survival"
+        android:label="Disaster Survival Guide"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

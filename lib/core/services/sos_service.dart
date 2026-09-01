@@ -8,6 +8,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:torch_light/torch_light.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Morse code SOS: ... --- ...
@@ -90,6 +91,11 @@ class SosService {
   Future<Position?> getCurrentPosition() async {
     try {
       if (!kIsWeb) {
+        final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+        if (!serviceEnabled) {
+          return null;
+        }
+
         final permission = await Geolocator.checkPermission();
         if (permission == LocationPermission.denied ||
             permission == LocationPermission.deniedForever) {
@@ -121,21 +127,18 @@ class SosService {
     for (final beat in _morsePattern) {
       if (!_isMorseActive) break;
       try {
-        // Platform-specific torch control (mobile only)
         if (!kIsWeb && (defaultTargetPlatform == TargetPlatform.android ||
             defaultTargetPlatform == TargetPlatform.iOS)) {
-          // torch_light package (mobile only)
           if (beat.on) {
-            // TorchLight.enableTorch();
+            await TorchLight.enableTorch();
           } else {
-            // TorchLight.disableTorch();
+            await TorchLight.disableTorch();
           }
         }
       } catch (_) {}
       await Future.delayed(Duration(milliseconds: beat.ms));
     }
 
-    // Repeat until stopped
     if (_isMorseActive) {
       _runMorsePattern();
     }
@@ -146,7 +149,7 @@ class SosService {
     try {
       if (!kIsWeb && (defaultTargetPlatform == TargetPlatform.android ||
           defaultTargetPlatform == TargetPlatform.iOS)) {
-        // TorchLight.disableTorch();
+        TorchLight.disableTorch();
       }
     } catch (_) {}
   }
