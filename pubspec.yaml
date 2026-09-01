@@ -1,0 +1,80 @@
+name: disaster_survival_guide
+description: "Offline Disaster Survival Guide - Production-Ready Emergency App"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  provider: ^6.1.2
+
+  # Local Database
+  sqflite: ^2.3.3+1
+  sqflite_common_ffi: ^2.3.4+4
+  path: ^1.9.0
+
+  # Geolocation & Compass
+  geolocator: ^13.0.4
+  flutter_compass: ^0.8.1
+
+  # SMS
+  url_launcher: ^6.3.1
+
+  # Audio (offline siren)
+  audioplayers: ^6.1.0
+
+  # Flashlight / Torch
+  torch_light: ^1.1.0
+
+  # Sensors (for compass on Windows fallback)
+  sensors_plus: ^6.1.0
+
+  # Shared Preferences (lightweight KV store)
+  shared_preferences: ^2.3.3
+
+  # Animations
+  flutter_animate: ^4.5.0
+
+  # Icons
+  flutter_svg: ^2.0.10+1
+  font_awesome_flutter: ^10.8.0
+
+  # Permission handling
+  permission_handler: ^11.3.1
+
+  # Wakelock (keep screen on during emergency)
+  wakelock_plus: ^1.2.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/audio/
+    - assets/images/
+    - assets/data/
+
+  fonts:
+    - family: Rajdhani
+      fonts:
+        - asset: assets/fonts/Rajdhani-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Rajdhani-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Rajdhani-Medium.ttf
+          weight: 500
+    - family: NotoSans
+      fonts:
+        - asset: assets/fonts/NotoSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSans-Bold.ttf
+          weight: 700
